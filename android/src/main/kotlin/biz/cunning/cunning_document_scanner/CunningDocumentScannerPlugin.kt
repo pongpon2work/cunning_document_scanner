@@ -11,6 +11,8 @@ import com.google.mlkit.common.MlKitException
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.RESULT_FORMAT_JPEG
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.SCANNER_MODE_FULL
+import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.SCANNER_MODE_BASE
+import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.CAPTURE_MODE_MANUAL
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -172,9 +174,10 @@ class CunningDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, ActivityA
     private fun startScan(noOfPages: Int, isGalleryImportAllowed: Boolean) {
         val options = GmsDocumentScannerOptions.Builder()
             .setGalleryImportAllowed(isGalleryImportAllowed)
-            .setPageLimit(noOfPages)
+            .setPageLimit(1)
             .setResultFormats(RESULT_FORMAT_JPEG)
-            .setScannerMode(SCANNER_MODE_FULL)
+            //.setCaptureMode(CAPTURE_MODE_MANUAL)
+            .setScannerMode(SCANNER_MODE_BASE)
             .build()
         val scanner = GmsDocumentScanning.getClient(options)
         scanner.getStartScanIntent(activity).addOnSuccessListener {
